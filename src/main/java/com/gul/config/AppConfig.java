@@ -1,28 +1,20 @@
 package com.gul.config;
 
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
+@SuppressWarnings("deprecation")
 @Configuration
-@EnableScheduling
-@ComponentScan(basePackages = "com.gul.service")
-public class AppConfig {
+@EnableWebMvc
+@ComponentScan(basePackages = "com")
+public class AppConfig extends WebMvcConfigurerAdapter {
 
-	   @Bean
-	    public ThreadPoolTaskScheduler threadPoolTaskScheduler(){
-	        ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
-	        threadPoolTaskScheduler.setPoolSize(5);
-	        return threadPoolTaskScheduler;
-	    }
-	   
-	   
-	   @Bean
-	   public TaskScheduler taskScheduler() {
-	       //org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler
-	       return new ThreadPoolTaskScheduler();
-	   }
+	@Override
+	public void configureViewResolvers(ViewResolverRegistry registry) {
+		registry.jsp("/WEB-INF/views/", ".jsp");
+	}
 }
