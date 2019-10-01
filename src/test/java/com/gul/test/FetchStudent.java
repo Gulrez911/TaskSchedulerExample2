@@ -28,19 +28,18 @@ public class FetchStudent {
 
 	private static Logger log = Logger.getLogger(FetchStudent.class);
 
-//	@Test
-//	public void testAddDepartment() {
-//		
-//		List<Student> li = service.findAll();
-//		for (Student student : li) {
-//			System.out.println("List: " + student.getFname());
-//			System.out.println("List: " + student.getLname());
-//			System.out.println("List: " + student.getEmail());
-//		}
-//	}
 	@Test
-	public void logn() {
-
+	public void testAddDepartment() {
+		
+		List<Student> li = service.findAll();
+		for (Student student : li) {
+			System.out.println("List: " + student.getFname());
+			System.out.println("List: " + student.getLname());
+			System.out.println("List: " + student.getEmail());
+		}
+	}
+	@Test
+	public void login() {
 		Student std = repo.findByEmailAndPassword("gulfarooqui1@gmail.com", "1234");
 		if (std == null) {
 			log.info("Invalid");
