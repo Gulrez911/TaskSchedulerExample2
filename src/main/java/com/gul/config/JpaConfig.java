@@ -22,11 +22,10 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@PropertySource({ "classpath:database.properties" })
+@PropertySource({ "classpath:db.properties" })
 @ComponentScan({ "com" })
 @EnableJpaRepositories(basePackages = { "com.gul.repo" })
 public class JpaConfig {
-
 	@Autowired
 	private Environment env;
 

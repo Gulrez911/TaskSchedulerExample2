@@ -4,8 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table
 public class Student {
 
 	@Id
@@ -13,7 +15,8 @@ public class Student {
 	private int id;
 	private String fname;
 	private String lname;
-
+	private String email;
+	private String password;
 
 	public int getId() {
 		return id;
@@ -39,8 +42,26 @@ public class Student {
 		this.lname = lname;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", fname=" + fname + ", lname=" + lname + "]";
+		return "Student [id=" + id + ", fname=" + fname + ", lname=" + lname + ", email=" + email
+				+ ", password=" + password + ", getClass()=" + getClass() + ", hashCode()="
+				+ hashCode() + ", toString()=" + super.toString() + "]";
 	}
 }
