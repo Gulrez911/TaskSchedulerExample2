@@ -4,10 +4,9 @@
 <html>
 <title>Home</title>
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700'
-	rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="./resources/css/bootstrap.min.css">
+<link href='./resources/css/fontGoogle.css' rel='stylesheet'
+	type='text/css'>
 <style>
 body {
 	font-family: 'Georgia', sherif;

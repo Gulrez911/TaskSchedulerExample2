@@ -20,46 +20,46 @@ public class SpringSchedulingConfigurerBeanExample {
 
 	private AtomicInteger counter = new AtomicInteger(0);
 
-	@Scheduled(fixedRate = 2000)
-	public void fixedRateJob() {
-		int jobId = counter.incrementAndGet();
-		System.out.println("Job @ fixed rate " + new Date() + ", jobId: " + jobId);
-	}
+//	@Scheduled(fixedRate = 2000)
+//	public void fixedRateJob() {
+//		int jobId = counter.incrementAndGet();
+//		System.out.println("Job @ fixed rate " + new Date() + ", jobId: " + jobId);
+//	}
 
-	public static void main(String[] args) {
-		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
-				SpringSchedulingConfigurerBeanExample.class);
-		try {
-			Thread.sleep(5000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} finally {
-			context.close();
-		}
-	}
+//	public static void main(String[] args) {
+//		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(
+//				SpringSchedulingConfigurerBeanExample.class);
+//		try {
+//			Thread.sleep(5000);
+//		} catch (InterruptedException e) {
+//			e.printStackTrace();
+//		} finally {
+//			context.close();
+//		}
+//	}
 
-	@Configuration
-	static class RegisterTaskSchedulerViaSchedulingConfigurer implements SchedulingConfigurer {
-
-		@Override
-		public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
-			taskRegistrar.setTaskScheduler(poolScheduler());
-
-			taskRegistrar.addFixedRateTask(new IntervalTask(new Runnable() {
-				@Override
-				public void run() {
-					System.out.println("Job @ fixed rate " + new Date() + ", Thread name is "
-							+ Thread.currentThread().getName());
-				}
-			}, 1000, 0));
-		}
-
-		@Bean
-		public TaskScheduler poolScheduler() {
-			ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
-			scheduler.setThreadNamePrefix("poolScheduler");
-			scheduler.setPoolSize(10);
-			return scheduler;
-		}
-	}
+//	@Configuration
+//	static class RegisterTaskSchedulerViaSchedulingConfigurer implements SchedulingConfigurer {
+//
+//		@Override
+//		public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
+//			taskRegistrar.setTaskScheduler(poolScheduler());
+//
+//			taskRegistrar.addFixedRateTask(new IntervalTask(new Runnable() {
+//				@Override
+//				public void run() {
+//					System.out.println("Job @ fixed rate " + new Date() + ", Thread name is "
+//							+ Thread.currentThread().getName());
+//				}
+//			}, 1000, 0));
+//		}
+//
+//		@Bean
+//		public TaskScheduler poolScheduler() {
+//			ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
+//			scheduler.setThreadNamePrefix("poolScheduler");
+//			scheduler.setPoolSize(10);
+//			return scheduler;
+//		}
+//	}
 }

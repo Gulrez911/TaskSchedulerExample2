@@ -13,7 +13,7 @@ import org.springframework.test.context.web.WebAppConfiguration;
 import com.gul.config.JpaConfig;
 import com.gul.entity.Student;
 import com.gul.repo.StudentRepository;
-import com.kgate.service.StudentService;
+import com.gul.service.StudentService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = JpaConfig.class)
@@ -30,7 +30,6 @@ public class FetchStudent {
 
 	@Test
 	public void testAddDepartment() {
-		
 		List<Student> li = service.findAll();
 		for (Student student : li) {
 			System.out.println("List: " + student.getFname());

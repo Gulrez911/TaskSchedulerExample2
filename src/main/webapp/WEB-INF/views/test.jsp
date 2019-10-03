@@ -2,10 +2,9 @@
 <html>
 <title>Home</title>
 <head>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-<link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700'
-	rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="./resources/css/bootstrap.min.css">
+<link href='./resources/css/fontGoogle.css' rel='stylesheet'
+	type='text/css'>
 <style>
 body {
 	font-family: 'Georgia', sherif;
@@ -29,21 +28,28 @@ body {
 <script>
 	function addRow() {
 		// 		alert("test");
-		$("#frm").append(
-				$("#tbl").append(
-						"<tr>" + "<td>" + "<input  type='text'/onkeyup='change()' id='123'>" + "</td>"
-								+ "<td>" + "<input type='text'/>" + "</td>"
-								+ "<td>" + "<input type='text'/>" + "</td>"
-								+ "<td>" + "<input type='text'/>" + "</td>"
-								+ "</tr>")
-		/* "<input type='text'/>" + "<input type='text'/>"
-				+ "<input type='text'/>" */);
+		$("#frm")
+				.append(
+						$("#tbl")
+								.append(
+										"<tr>"
+												+ "<td>"
+												+ "<input  type='text'/onkeyup='change()' id='123'>"
+												+ "</td>" + "<td>"
+												+ "<input type='text'/>"
+												+ "</td>" + "<td>"
+												+ "<input type='text'/>"
+												+ "</td>" + "<td>"
+												+ "<input type='text'/>"
+												+ "</td>" + "</tr>")
+				/* "<input type='text'/>" + "<input type='text'/>"
+						+ "<input type='text'/>" */);
 	}
-	function change(){
-// alert("test");
-var x = $("#123").val();
-console.log(x);
-		}
+	function change() {
+		// alert("test");
+		var x = $("#123").val();
+		console.log(x);
+	}
 </script>
 
 

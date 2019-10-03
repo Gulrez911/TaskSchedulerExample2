@@ -1,4 +1,4 @@
-package com.kgate.service;
+package com.gul.service;
 
 import java.util.List;
 
