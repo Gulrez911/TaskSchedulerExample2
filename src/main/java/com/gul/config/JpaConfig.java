@@ -20,9 +20,11 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.gul.entity.PropertiesConfig;
+
 @Configuration
 @EnableTransactionManagement
-@PropertySource({ "classpath:db.properties" })
+@PropertySource({ "classpath:db.properties"})
 @ComponentScan({ "com" })
 @EnableJpaRepositories(basePackages = { "com.gul.repo" })
 public class JpaConfig {
@@ -76,4 +78,5 @@ public class JpaConfig {
 	public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
 		return new PersistenceExceptionTranslationPostProcessor();
 	}
+
 }

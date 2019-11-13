@@ -1,4 +1,4 @@
-package com.gul.entity;
+package com.gul.test.controller;
 
 import java.util.Date;
 
@@ -8,10 +8,6 @@ public class Test implements Runnable {
 	public Test(String name) {
 	        this.name = name;
 	    }
-
-	public Test() {
-		super();
-	}
 
 	public String getName() {
 		return name;
