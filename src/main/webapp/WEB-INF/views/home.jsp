@@ -1,7 +1,10 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
 <html>
 <title>Home</title>
 <head>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <link rel="stylesheet" href="./resources/css/bootstrap.min.css">
 <link href='./resources/css/fontGoogle.css' rel='stylesheet'
 	type='text/css'>
@@ -10,43 +13,71 @@ body {
 	font-family: 'Georgia', sherif;
 }
 </style>
+<script type="text/javascript">
+	function submitForm() {
+
+		var paperElement = document.getElementById("modalPapers");
+
+		if (!paperElement.value) {
+			console.log("No files selected.")
+			return;
+		}
+		var form = document.getElementById("myForm");
+		var formData = new FormData(form);
+		var xhr = getXMLHTTP();
+		xhr.open('POST', "submitFiles");
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState == 4 && xhr.status == 200) {
+				console.log("Files Uploaded")
+			}
+		}
+		xhr.send(formData);
+	}
+
+	 function getXMLHTTP() {
+         var x = false;
+         try {
+            x = new XMLHttpRequest();
+         }catch(e) {
+           try {
+              x = new ActiveXObject("Microsoft.XMLHTTP");
+           }catch(ex) {
+              try {
+                  req = new ActiveXObject("Msxml2.XMLHTTP");
+              }
+              catch(e1) {
+                  x = false;
+              }
+           }
+        }
+        return x;
+      }
+</script>
 </head>
 <body>
 	<div class="container">
-		<button onclick="window.location.href='list'" class="btn btn-primary">Student
-			List</button>
-		<table>
-			<form:form action="save" modelAttribute="student" method="post">
-				<form:hidden path="id" />
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="fName">First Name:</label>
-						<form:input path="fname" class="form-control"
-							placeholder="First Name" id="fName" />
-					</div>
-					<div class="form-group col-md-6">
-						<label for="lName">Last Name:</label>
-						<form:input path="lname" class="form-control"
-							placeholder="Last Name" id="lName" />
+		<form class="form-horizontal" id="myForm" method="POST"
+			enctype="multipart/form-data">
+			<fieldset>
+				<!-- File Button -->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="papers"> Add
+						Files </label>
+					<div class="col-md-4">
+						<input name="papers" id="modalPapers" type="file"
+							class="filestyle" multiple data-input="false">
 					</div>
 				</div>
-				<div class="form-row">
-					<div class="form-group col-md-6">
-						<label for="email">Email</label>
-						<form:input path="email" class="form-control" placeholder="Email"
-							id="email" />
-					</div>
-					<div class="form-group col-md-6">
-						<label for="pass">First Name:</label>
-						<form:input path="password" class="form-control"
-							placeholder="Password" id="pass" />
+				<!-- Button -->
+				<div class="form-group">
+					<label class="col-md-4 control-label" for="submit"></label>
+					<div class="col-md-4">
+						<input type="button" value="Submit" name="submit"
+							onclick="submitForm()" class="btn btn-success">
 					</div>
 				</div>
-				<button class="btn btn-primary">Submit</button>
-			</form:form>
-
-		</table>
-
+			</fieldset>
+		</form>
 	</div>
 </body>
 </html>

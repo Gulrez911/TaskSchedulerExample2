@@ -70,9 +70,12 @@
 	//Pick the next file in queue and upload it to remote server
 	function uploadNext() {
 		var xhr = new XMLHttpRequest();
+		console.log("called ")
 		var fd = new FormData();
 		var file = document.getElementById('files').files[filesUploaded];
+		console.log("file: "+file)
 		fd.append("multipartFile", file);
+		console.log("file: "+fd)
 		xhr.upload.addEventListener("progress", onUploadProgress, false);
 		xhr.addEventListener("load", onUploadComplete, false);
 		xhr.addEventListener("error", onUploadFailed, false);
