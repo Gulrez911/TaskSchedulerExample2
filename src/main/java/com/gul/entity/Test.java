@@ -9,6 +9,10 @@ public class Test implements Runnable {
 	        this.name = name;
 	    }
 
+	public Test() {
+		super();
+	}
+
 	public String getName() {
 		return name;
 	}

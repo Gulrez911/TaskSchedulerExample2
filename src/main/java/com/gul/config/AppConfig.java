@@ -1,14 +1,11 @@
 package com.gul.config;
 
+import java.io.IOException;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.scheduling.TaskScheduler;
-import org.springframework.scheduling.annotation.EnableAsync;
-import org.springframework.scheduling.annotation.EnableScheduling;
-import org.springframework.scheduling.annotation.SchedulingConfigurer;
-import org.springframework.scheduling.concurrent.ConcurrentTaskScheduler;
-import org.springframework.scheduling.config.ScheduledTaskRegistrar;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
@@ -18,8 +15,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com")
-@EnableAsync
-@EnableScheduling
 public class AppConfig extends WebMvcConfigurerAdapter /* implements SchedulingConfigurer */ {
 
 	@Override
@@ -31,14 +26,11 @@ public class AppConfig extends WebMvcConfigurerAdapter /* implements SchedulingC
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
-// if Spring TaskScheduler Bean not injected
-	@Bean
-	public TaskScheduler taskScheduler() {
-		return new ConcurrentTaskScheduler(); // single threaded by default
-	}
 
-//	@Override
-//	public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
-//		taskRegistrar.setTaskScheduler(taskScheduler());
-//	}
+	@Bean()
+	public CommonsMultipartResolver getResolver() throws IOException {
+		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+		resolver.setMaxUploadSizePerFile(5242880);// 5MB
+		return resolver;
+	}
 }

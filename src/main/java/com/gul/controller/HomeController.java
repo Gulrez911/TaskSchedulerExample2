@@ -1,83 +1,49 @@
 package com.gul.controller;
 
-import java.util.List;
-import java.util.Optional;
+import java.io.File;
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.gul.entity.Student;
-import com.gul.repo.StudentRepository;
+import com.gul.entity.UploadedFile;
 
 @Controller
 public class HomeController {
 
-	@Autowired
-	StudentRepository repo;
-
 	private Logger logger = Logger.getLogger(HomeController.class);
 
-	@GetMapping("/home")
+	@GetMapping("/")
 	public String view() {
 		logger.info("View method called");
 		System.out.println("testing");
-//		TimeZone timeZone = TimeZone.getTimeZone("Asia/Kolkata");
-//		String exp = "";
-//		CronTrigger trigger = new CronTrigger("test",timeZone);
 		return "index";
 	}
 
-	@GetMapping(value = { "/", "add" })
-	public String home(Model model) {
-		model.addAttribute("student", new Student());
-		return "home";
+	@RequestMapping("/save-product")
+	public void saveFile(HttpServletRequest request, @ModelAttribute UploadedFile uploadedFile,
+			BindingResult bindingResult, Model model) {
+
+		MultipartFile multipartFile = uploadedFile.getMultipartFile();
+		String fileName = multipartFile.getOriginalFilename();
+		try {
+			File file = new File(request.getSession().getServletContext().getRealPath("/image"), fileName);
+			multipartFile.transferTo(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
-	@PostMapping("save")
-	public ModelAndView save(@ModelAttribute("student") Student student) {
-		ModelAndView mav = new ModelAndView("home");
-		repo.save(student);
-		mav.addObject("student", new Student());
-		return mav;
+	@RequestMapping(value = "/product-input-form")
+	public String inputProduct(Model model) {
+		return "productForm";
 	}
-
-	@GetMapping("list")
-	public ModelAndView list() {
-		ModelAndView mav = new ModelAndView("list");
-		List<Student> list = repo.findAll();
-		mav.addObject("list", list);
-		return mav;
-	}
-
-	@GetMapping("update")
-	public ModelAndView update(@RequestParam("id") int id) {
-		ModelAndView mav = new ModelAndView("home");
-		Optional<Student> student = repo.findById(id);
-		mav.addObject("student", student);
-		return mav;
-	}
-
-	@GetMapping("delete")
-	public ModelAndView delete(@RequestParam("id") int id) {
-		ModelAndView mav = new ModelAndView("list");
-		repo.deleteById(id);
-		List<Student> list = repo.findAll();
-		mav.addObject("list", list);
-		return mav;
-	}
-
-	@GetMapping("test")
-	public ModelAndView test() {
-		ModelAndView mav = new ModelAndView("test");
-		mav.addObject("student", new Student());
-		return mav;
-	}
-
 }
